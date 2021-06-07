@@ -1,6 +1,19 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+/*
+typedef struct _Pessoa
+{
+    char* nome;
+    int idade, key, id;
+} Pessoa;
+
+typedef struct _BTree
+{
+    Pessoa p;
+    struct _BTree *left, *right;
+} BTree;
+*/
 
 typedef struct _BTree
 {
@@ -10,6 +23,15 @@ typedef struct _BTree
     struct _BTree *left, *right;
 } BTreePessoas;
 
+/**
+ * @brief Criar nodo de arvore
+ * 
+ * @param nome 
+ * @param idade 
+ * @param id 
+ * @param chave 
+ * @return BTreePessoas* 
+ */
 BTreePessoas *btree_new_node(char* nome, int idade, int id, int chave){
     BTreePessoas *aux = malloc(sizeof(BTreePessoas));
 
@@ -23,10 +45,20 @@ BTreePessoas *btree_new_node(char* nome, int idade, int id, int chave){
     return aux;
 }
 
+/**
+ * @brief Inserir nodo em arvore
+ * 
+ * @param root 
+ * @param nome 
+ * @param idade 
+ * @param id 
+ * @param value 
+ * @return BTreePessoas* 
+ */
 BTreePessoas *btree_insert(BTreePessoas *root, char* nome, int idade, int id, int value){
     if(root){
         if(value < root->key)
-            root->left = btree_insert(root->left, nome, idade ,id, value);
+            root->left = btree_insert(root->left, nome, idade , id, value);
         if(value > root->key)
             root->right = btree_insert(root->right, nome, idade, id, value);
     }
@@ -37,6 +69,13 @@ BTreePessoas *btree_insert(BTreePessoas *root, char* nome, int idade, int id, in
     return root;
 }
 
+/**
+ * @brief Procura nodo especifico na arvore pela chave
+ * 
+ * @param root 
+ * @param key 
+ * @return BTreePessoas* 
+ */
 BTreePessoas *btree_search(BTreePessoas *root, int key){
     if(root){
         if(key < root->key)
@@ -49,6 +88,8 @@ BTreePessoas *btree_search(BTreePessoas *root, int key){
     else 
         return NULL;
 }
+
+#pragma region ListagensOrdenadas(Travessias)
 
 void btree_inorder(BTreePessoas* root){
     if(root){
@@ -74,6 +115,14 @@ void btree_postorder(BTreePessoas* root){
     }
 }
 
+#pragma endregion
+
+/**
+ * @brief Devolve tamanho da arvore
+ * 
+ * @param root 
+ * @return int 
+ */
 int btree_size(BTreePessoas* root){
     if(root){
         int tamEsq, tamDir;
@@ -85,8 +134,9 @@ int btree_size(BTreePessoas* root){
         return 0;
 }
 
+//TO DO
 /**
- * @brief TO DO
+ * @brief Remove certo nodo da arvore
  * 
  * @param root 
  * @param key 
@@ -119,13 +169,29 @@ BTreePessoas *btree_remove(BTreePessoas* root, int key){
     }
 }
 
+void Show(BTreePessoas* root){
+    printf("%s\n", root->nome);
+}
+
 int main(){
-    BTreePessoas *pessoas = NULL;
+    BTreePessoas *pessoas = NULL, *aux = NULL;
+
 
     pessoas = btree_insert(pessoas, "Pedro", 20, 123, 20);
     pessoas = btree_insert(pessoas, "Maria", 16, 235, 30);
     pessoas = btree_insert(pessoas, "Andre", 43, 323, 10);
+    pessoas = btree_insert(pessoas, "Jose", 43, 323, 12);
+    pessoas = btree_insert(pessoas, "Sett", 43, 323, 132);
+    pessoas = btree_insert(pessoas, "Jorge", 43, 323, 14);
+    pessoas = btree_insert(pessoas, "Ni", 43, 323, 45);
 
+    /*Show(pessoas);
+    Show(pessoas->left);
+    Show(pessoas->left->right);
+    Show(pessoas->left->right->right);
+    Show(pessoas->right);
+    Show(pessoas->right->right);
+    Show(pessoas->right->left);*/
     btree_inorder(pessoas);
 
     return 0;
