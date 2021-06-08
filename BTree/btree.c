@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+
 /*
 typedef struct _Pessoa
 {
@@ -22,6 +23,8 @@ typedef struct _BTree
 
     struct _BTree *left, *right;
 } BTreePessoas;
+
+#pragma region OrganizacaoNodos
 
 /**
  * @brief Criar nodo de arvore
@@ -69,25 +72,42 @@ BTreePessoas *btree_insert(BTreePessoas *root, char* nome, int idade, int id, in
     return root;
 }
 
+//TO DO
 /**
- * @brief Procura nodo especifico na arvore pela chave
+ * @brief Remove certo nodo da arvore
  * 
  * @param root 
  * @param key 
  * @return BTreePessoas* 
  */
-BTreePessoas *btree_search(BTreePessoas *root, int key){
+BTreePessoas *btree_remove(BTreePessoas* root, int key){
     if(root){
         if(key < root->key)
-            return btree_search(root->left, key);
+            root->left = btree_remove(root->left, key);
         else if(key > root->key)
-            return btree_search(root->right, key);
+            root->right = btree_remove(root->right, key);
         else 
             return root;
     }
-    else 
-        return NULL;
+    else if(root->left == NULL)
+    {
+        BTreePessoas *sTree = root->right;
+        free(root);
+        root = sTree;
+    }
+    else if(root->right == NULL)
+    {
+        BTreePessoas *sTree = root->left;
+        free(root);
+        root = sTree;
+    }
+    else
+    {
+        //To do
+    }
 }
+
+#pragma endregion
 
 #pragma region ListagensOrdenadas(Travessias)
 
@@ -134,6 +154,8 @@ void btree_postorder(BTreePessoas* root){
 
 #pragma endregion
 
+#pragma region Listagem/Navegacao
+
 /**
  * @brief Devolve tamanho da arvore
  * 
@@ -151,40 +173,27 @@ int btree_size(BTreePessoas* root){
         return 0;
 }
 
-//TO DO
 /**
- * @brief Remove certo nodo da arvore
+ * @brief Procura nodo especifico na arvore pela chave
  * 
  * @param root 
  * @param key 
  * @return BTreePessoas* 
  */
-BTreePessoas *btree_remove(BTreePessoas* root, int key){
+BTreePessoas *btree_search(BTreePessoas *root, int key){
     if(root){
         if(key < root->key)
-            root->left = btree_remove(root->left, key);
+            return btree_search(root->left, key);
         else if(key > root->key)
-            root->right = btree_remove(root->right, key);
+            return btree_search(root->right, key);
         else 
             return root;
     }
-    else if(root->left == NULL)
-    {
-        BTreePessoas *sTree = root->right;
-        free(root);
-        root = sTree;
-    }
-    else if(root->right == NULL)
-    {
-        BTreePessoas *sTree = root->left;
-        free(root);
-        root = sTree;
-    }
-    else
-    {
-        //To do
-    }
+    else 
+        return NULL;
 }
+
+#pragma endregion
 
 //Funcao teste para mostrar 1 pessoa (nodo)
 void Show(BTreePessoas* root){
