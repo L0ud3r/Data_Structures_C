@@ -174,6 +174,29 @@ int btree_size(BTreePessoas* root){
 }
 
 /**
+ * @brief Retorna a profundidade da arvore, ou seja, o quao "funda" esta é
+ * 
+ * @param root 
+ * @return int 
+ */
+int btree_depth(BTreePessoas *root){
+    int aux = 0;
+
+    if(root){
+        int pesoEsq = btree_depth(root->left);
+        int pesoDir = btree_depth(root->right);
+        int pesoMax = pesoEsq;
+
+        if(pesoDir > pesoEsq)
+            pesoMax = pesoDir;
+
+        aux = 1 + pesoMax;
+    }
+
+    return aux;
+}
+
+/**
  * @brief Procura nodo especifico na arvore pela chave
  * 
  * @param root 
@@ -222,7 +245,9 @@ int main(){
     Show(pessoas->right->right->left);
     */
 
-    btree_preorder(pessoas);
+    //btree_preorder(pessoas);
+
+    printf("Tamanho da arvore: %d\nProfundidade da arvore: %d\n", btree_size(pessoas), btree_depth(pessoas));
 
     return 0;
 }
