@@ -72,22 +72,56 @@ BTreePessoas *btree_insert(BTreePessoas *root, char* nome, int idade, int id, in
     return root;
 }
 
-//TO DO
 /**
- * @brief Remove certo nodo da arvore
+ * @brief Navega para o nodo mais pequeno possivel (à esquerda)
+ * 
+ * @param root 
+ * @return BTreePessoas* 
+ */
+BTreePessoas *btree_leftmost(BTreePessoas *root){
+    if(root && root->left)
+        return btree_leftmost(root->left);
+        
+    else return root;
+}
+
+/**
+ * @brief Limpar arvore
+ * 
+ * @param root 
+ * @return void* 
+ */
+void *btree_free(BTreePessoas *root){
+    if(root){
+        btree_free(root->left);
+        btree_free(root->right);
+
+        //free aos dados necessarios
+        free(root->nome);
+        free(root);
+    }
+}
+
+//Rever bem, com problemas
+/**
+ * @brief Remove a arvore binaria de forma alternativa
  * 
  * @param root 
  * @param key 
  * @return BTreePessoas* 
  */
-BTreePessoas *btree_remove(BTreePessoas* root, int key){
+BTreePessoas *btree_free_alt(BTreePessoas* root, int key){
     if(root){
         if(key < root->key)
-            root->left = btree_remove(root->left, key);
+            root->left = btree_free_alt(root->left, key);
+
         else if(key > root->key)
-            root->right = btree_remove(root->right, key);
-        else 
-            return root;
+            root->right = btree_free_alt(root->right, key);
+
+        else if (!root->left && !root->right){
+            free(root);
+            root = NULL;
+        }
     }
     else if(root->left == NULL)
     {
@@ -103,7 +137,14 @@ BTreePessoas *btree_remove(BTreePessoas* root, int key){
     }
     else
     {
-        //To do
+        BTreePessoas *smaller = btree_leftmost(root->right);
+
+        //Trocar informacao
+        int min = smaller->key;
+        smaller->key = root->key;
+        root->key = min;
+        
+        root->right = btree_free_alt(root->right, key);
     }
 }
 
@@ -224,7 +265,7 @@ void Show(BTreePessoas* root){
 }
 
 int main(){
-    BTreePessoas *pessoas = NULL, *aux = NULL;
+    BTreePessoas *pessoas = NULL;
 
 
     pessoas = btree_insert(pessoas, "Pedro", 20, 123, 20);
@@ -249,5 +290,12 @@ int main(){
 
     printf("Tamanho da arvore: %d\nProfundidade da arvore: %d\n", btree_size(pessoas), btree_depth(pessoas));
 
+    BTreePessoas *aux = btree_search(pessoas, 20);
+
+    if(aux)
+        printf("\nPessoa com a chave %d: %s encontrado/a!\n", aux->key, aux->nome);
+    else printf("\nPessoa inexistente na arvore!\n");
+
+    btree_free(pessoas);
     return 0;
 }
