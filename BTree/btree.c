@@ -91,6 +91,11 @@ BTreePessoas *btree_search(BTreePessoas *root, int key){
 
 #pragma region ListagensOrdenadas(Travessias)
 
+/**
+ * @brief Mostra arvore por ordem de chaves
+ * 
+ * @param root 
+ */
 void btree_inorder(BTreePessoas* root){
     if(root){
         btree_inorder(root->left);
@@ -99,6 +104,12 @@ void btree_inorder(BTreePessoas* root){
     }
 }
 
+/**
+ * @brief Mostra arvore a começar pelo primeiro nodo, depois lado esquerdo, depois direito
+ * de cima para baixo
+ * 
+ * @param root 
+ */
 void btree_preorder(BTreePessoas* root){
     if(root){
         printf("%s\n", root->nome);
@@ -107,6 +118,12 @@ void btree_preorder(BTreePessoas* root){
     }
 }
 
+/**
+ * @brief Mostra arvore a começar pelo lado esquerdo, depois direito, depois o primeiro nodo
+ * de baixo para cima
+ * 
+ * @param root 
+ */
 void btree_postorder(BTreePessoas* root){
     if(root){
         btree_postorder(root->left);
@@ -169,6 +186,7 @@ BTreePessoas *btree_remove(BTreePessoas* root, int key){
     }
 }
 
+//Funcao teste para mostrar 1 pessoa (nodo)
 void Show(BTreePessoas* root){
     printf("%s\n", root->nome);
 }
@@ -185,14 +203,17 @@ int main(){
     pessoas = btree_insert(pessoas, "Jorge", 43, 323, 14);
     pessoas = btree_insert(pessoas, "Ni", 43, 323, 45);
 
-    /*Show(pessoas);
+    /*
+    Show(pessoas);
     Show(pessoas->left);
     Show(pessoas->left->right);
     Show(pessoas->left->right->right);
     Show(pessoas->right);
     Show(pessoas->right->right);
-    Show(pessoas->right->left);*/
-    btree_inorder(pessoas);
+    Show(pessoas->right->right->left);
+    */
+
+    btree_preorder(pessoas);
 
     return 0;
 }
