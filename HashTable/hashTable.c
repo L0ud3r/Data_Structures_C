@@ -16,7 +16,6 @@ typedef struct _Hash{
     int size;
 } Hash;
 
-
 Hash* create_hash(int size){
     //Alloca memoria para hash
     Hash* hash = malloc(sizeof(hash));
