@@ -79,6 +79,7 @@ void listar_antecessores(Grafo *g, int destino){
         aux = g->sucessores;
         while(aux && aux->destino != destino){
             printf("%d ", g->partida);
+            aux = aux->next;
         }
 
         g = g->next;
