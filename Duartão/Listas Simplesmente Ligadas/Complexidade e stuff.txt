@@ -1,0 +1,3 @@
+Inserção à cabeça é mais eficiente : O(1)
+Inserção à cauda é mais lenta: O(n)
+Pesquisa: O(n)
