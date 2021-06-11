@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <math.h>
 
 /*
 typedef struct _Pessoa
@@ -222,6 +223,28 @@ void btree_postorder(BTreePessoas* root){
 }
 
 #pragma endregion
+
+//Check if BTree is balanced
+int isBalanced(BTreePessoas* root)
+{
+    int lh; /* for height of left subtree */
+    int rh; /* for height of right subtree */
+ 
+    /* If tree is empty then return true */
+    if (root == NULL)
+        return 1;
+ 
+    /* Get the height of left and right sub trees */
+    lh = btree_depth(root->left);
+    rh = btree_depth(root->right);
+ 
+    if (abs(lh - rh) <= 1 && isBalanced(root->left) && isBalanced(root->right))
+        return 1;
+ 
+    /* If we reach here then
+    tree is not height-balanced */
+    return 0;
+}
 
 #pragma region Listagem/Navegacao
 
