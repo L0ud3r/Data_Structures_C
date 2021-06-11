@@ -20,6 +20,8 @@ List *head_insert(List *lst, int value)
     return tmp;
 }
 
+
+
 List *tail_insert(List *lst, int value)
 {
 

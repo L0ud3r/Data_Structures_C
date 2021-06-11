@@ -17,6 +17,7 @@ typedef struct _list {
 } List;
 
 
+
 List* new_list() {
     List* list = (List*) malloc(sizeof(List));
     assert(list);
