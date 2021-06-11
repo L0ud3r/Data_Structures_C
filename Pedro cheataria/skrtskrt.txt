@@ -1,0 +1,13 @@
+É possivel aplicar visitas breadth first e depth first a grafos ou a arvores.
+
+A travessia de uma arvore pode ser realizada de diferentes formas. Selecione a verdadeira: Nenhuma das outras afirmações é verdadeira. (checkar png github se necessario)
+
+A remoção de um elemento que seja uma folha numa arvore binaria de procura (BALANCEADA) com n nodos tem complexidade: O(log2n)
+
+Malloc vs calloc difere em : Memoria alocada pelo calloc é inicializada a 0.
+
+Tamanho de alocaçao de struct corresponde: Igual ao somatorio dos tamanhos de cada um dos seus membros.
+
+Travessia de uma arvore pode ser realizada de diferentes formas. Verdadeira: Nenhuma das opçoes é verdadeira (checkar png github se necessario)
+
+O uso de uma lista dup. ligada (nao circ): Permite que a lista possa ser percorrida em ambas as direçoes, mas a complexidade das operaçoes de inserçao sao semelhantes as das listas simplesmente ligadas.
