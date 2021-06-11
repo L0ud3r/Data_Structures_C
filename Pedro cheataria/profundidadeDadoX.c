@@ -25,3 +25,22 @@ int arvoreProfundidade(BTree *root, int v){
 
     return -1;
 }
+
+int arvoreProfundidadeRec(BTree *root, int v, int counter){
+    BTree* aux = root;
+
+    if(aux){
+        if(v < aux->value){
+            return arvoreProfundidade(aux->left, v, ++counter);
+        }
+            
+        else if(v > aux->value){
+            return arvoreProfundidade(aux->right, v, ++counter);
+        }
+        else 
+            //A contador com a raiz
+            return counter + 1;
+    }
+
+    return -1;
+}

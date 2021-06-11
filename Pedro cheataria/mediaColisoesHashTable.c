@@ -28,10 +28,11 @@ double mediaColisoes(HashTable* hash){
     int counter1 = 0, counter2, colisoesTotais = 0;
 
     for(HashTable* aux = hash; aux; aux = aux->next){
-        counter1++;
 
-        if(aux->lista->next != NULL){
+        if(aux->lista != NULL){
+            counter1++;
             counter2 = 0;
+
             for(ListCollisions* aux2 = hash->lista; aux2; aux2 = aux->next){
                 counter2++;
             }

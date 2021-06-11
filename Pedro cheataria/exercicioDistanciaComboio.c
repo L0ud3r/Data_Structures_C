@@ -17,7 +17,7 @@ void atribuirTime(Origin* grafo){
     Origin *aux = grafo;
 
     while(aux){
-        Target* aux2 = grafo->targets;
+        Target* aux2 = aux->targets;
 
         while(aux2){
             aux2->time = aux2->distance * 2;
