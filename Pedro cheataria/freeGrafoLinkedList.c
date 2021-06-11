@@ -14,8 +14,6 @@ typedef struct _node
     struct _node *next;
 } Grafo;
 
-
-
 void free_graph(Grafo *g){
     while(g){
         Grafo *verticeToRemove = g;
