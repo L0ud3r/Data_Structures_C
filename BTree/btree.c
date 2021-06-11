@@ -152,6 +152,34 @@ BTreePessoas *btree_free_alt(BTreePessoas* root, int key){
 
 #pragma region ListagensOrdenadas(Travessias)
 
+    #pragma region Breadth First Search
+
+    /* Function to print level
+    order traversal a tree*/
+    void printLevelOrder(BTreePessoas* root)
+    {
+        for (int i = 1; i <= btree_depth(root); i++)
+            printCurrentLevel(root, i);
+    }
+    
+    /* Print nodes at a current level */
+    void printCurrentLevel(BTreePessoas* root, int level)
+    {
+        if (root == NULL)
+            return;
+        if (level == 1){
+            //print
+        }
+        else if (level > 1)
+        {
+            printCurrentLevel(root->left, level-1);
+            printCurrentLevel(root->right, level-1);
+        }
+    }
+
+    #pragma endregion
+
+
 /**
  * @brief Mostra arvore por ordem de chaves
  * 
