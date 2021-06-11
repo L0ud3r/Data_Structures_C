@@ -8,5 +8,5 @@ typedef struct _btree{
 void substituiPorSomatorio(BTree* root){
     int somatorio;
 
-
+    
 }
