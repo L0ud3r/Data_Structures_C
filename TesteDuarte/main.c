@@ -141,8 +141,11 @@ int main()
     visit_list(list);
     printf("---\n");
 
-    list = apenas_index_par(list);
-    visit_list(list);
+    
+
+    List *list2 = NULL;
+    list2 = apenas_index_par(list);
+    visit_list(list2);
 
 
 
