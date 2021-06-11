@@ -1,0 +1,2 @@
+Inserçao cauda e cabeça: O(1)
+Restantes algoritmos: O(n)
