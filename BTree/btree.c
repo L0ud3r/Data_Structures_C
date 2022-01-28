@@ -310,6 +310,28 @@ BTreePessoas *btree_search(BTreePessoas *root, int key){
 
 #pragma endregion
 
+/**
+ * @brief Função que calcula a altura (níveis) da árvore
+ * 
+ * @param t 
+ * @return int 
+ */
+int alturaArvore(BTreePessoas* t){
+    int soma = 0, alturaEsq, alturaDir, maior;
+
+    if(t){
+        alturaEsq = alturaArvore(t->left);
+        alturaDir = alturaArvore(t->right);
+
+        if(alturaEsq < alturaDir) maior = alturaDir;
+        else maior = alturaEsq;
+
+        soma = 1 + maior;
+    }
+
+    return soma;
+}
+
 //Funcao teste para mostrar 1 pessoa (nodo)
 void Show(BTreePessoas* root){
     printf("%s\n", root->nome);
